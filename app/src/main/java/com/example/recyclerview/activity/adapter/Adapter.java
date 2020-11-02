@@ -9,10 +9,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recyclerview.R;
+import com.example.recyclerview.activity.model.Filme;
+
+import java.util.List;
 
 /*Created by Rafael Madakis */
 public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
+    private List<Filme> listaFilmes;
+
+    public Adapter(List<Filme> lista) {
+
+        this.listaFilmes = lista;
+    }
 
     @NonNull
     @Override
@@ -26,14 +35,17 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-            holder.titulo.setText("titulo de Teste");
-            holder.genero.setText("Comédia");
-            holder.ano.setText("2017");
+
+            Filme filme = listaFilmes.get(position);
+            holder.titulo.setText(filme.getTituloFilme());
+            holder.genero.setText(filme.getGenero());
+            holder.ano.setText(filme.getAno());
     }
 
+    //Descobre o tamanho da lista
     @Override
     public int getItemCount() {
-        return 5;
+        return listaFilmes.size();
     }
 
     //View Holder (VH)
