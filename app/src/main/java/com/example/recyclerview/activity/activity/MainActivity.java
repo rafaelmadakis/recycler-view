@@ -6,9 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.recyclerview.R;
+import com.example.recyclerview.activity.RecyclerItemClickListener;
 import com.example.recyclerview.activity.adapter.Adapter;
 import com.example.recyclerview.activity.model.Filme;
 
@@ -34,48 +38,81 @@ public class MainActivity extends AppCompatActivity {
         Adapter adapter = new Adapter(listaFilmes);
 
 
-
         //Configura RecyclerView
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayout.VERTICAL));
         recyclerView.setAdapter(adapter);
+
+
+        //evento de click
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(
+                        getApplicationContext(),
+                        recyclerView,
+                        new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                Filme filme = listaFilmes.get(position);
+                                Toast.makeText(
+                                        getApplicationContext(),
+                                        "Item pressionado: " + filme.getTituloFilme(),
+                                        Toast.LENGTH_SHORT
+                                ).show();
+                            }
+
+                            @Override
+                            public void onLongItemClick(View view, int position) {
+                                Filme filme = listaFilmes.get(position);
+                                Toast.makeText(
+                                        getApplicationContext(),
+                                        "Click longo: " +  filme.getTituloFilme(),
+                                        Toast.LENGTH_SHORT
+                                ).show();
+                            }
+
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            }
+                        }
+                ));
     }
 
-    public void criarFilmes(){
+    public void criarFilmes() {
 
-        Filme filme =  new Filme("Homem Aranha - De volta ao lar", "Ação", "2017");
+        Filme filme = new Filme("Homem Aranha - De volta ao lar", "Ação", "2017");
         this.listaFilmes.add(filme);
 
-        filme =  new Filme("Mulher Maravilha", "Ação", "2019");
+        filme = new Filme("Mulher Maravilha", "Ação", "2019");
         this.listaFilmes.add(filme);
 
-        filme =  new Filme("Liga da Justiça", "Ação", "2020");
+        filme = new Filme("Liga da Justiça", "Ação", "2020");
         this.listaFilmes.add(filme);
 
-        filme =  new Filme("Capitão América", "Aventura/Ficção", "2016");
+        filme = new Filme("Capitão América", "Aventura/Ficção", "2016");
         this.listaFilmes.add(filme);
 
-        filme =  new Filme("It: A Coisa", "Terror", "2015");
+        filme = new Filme("It: A Coisa", "Terror", "2015");
         this.listaFilmes.add(filme);
 
-        filme =  new Filme("Pica-Pau: O Filme", "comédia/Ação", "2017");
+        filme = new Filme("Pica-Pau: O Filme", "comédia/Ação", "2017");
         this.listaFilmes.add(filme);
 
-        filme =  new Filme("A Múmia", "Terror", "2015");
+        filme = new Filme("A Múmia", "Terror", "2015");
         this.listaFilmes.add(filme);
 
-        filme =  new Filme("A Bela e a Fera", "Romance", "2013");
+        filme = new Filme("A Bela e a Fera", "Romance", "2013");
         this.listaFilmes.add(filme);
 
-        filme =  new Filme("Meu Malvado favorito 3", "Comédia", "2017");
+        filme = new Filme("Meu Malvado favorito 3", "Comédia", "2017");
         this.listaFilmes.add(filme);
 
-        filme =  new Filme("Homem Aranha - De volta ao lar", "Ação", "2017");
+        filme = new Filme("Homem Aranha - De volta ao lar", "Ação", "2017");
         this.listaFilmes.add(filme);
 
-        filme =  new Filme("Homem Aranha - De volta ao lar", "Ação", "2017");
+        filme = new Filme("Homem Aranha - De volta ao lar", "Ação", "2017");
         this.listaFilmes.add(filme);
     }
 }
